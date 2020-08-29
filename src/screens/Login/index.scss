@@ -1,25 +1,86 @@
-#login-container{
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@use "../../scss/mixins";
+@use "../../scss/variables";
+
+#login-container {
+  @include mixins.full-screen;
+  @include mixins.flex-center;
+  padding: 0px 20px;
+  background-color: rgb(240, 242, 245);
 }
 
-
-#login-form{
-    width: 400px;
-    height: auto;
+#login-form {
+  width: 100%;
+  height: auto;
+  background-color: white;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 5px;
 }
 
+@media screen and (min-width: variables.$bp-sm) {
+  #login-form {
+    width: 540px;
+  }
+}
 
-#login-form-email,#login-form-password{
-    width: 100%;
-    margin-bottom: 20px;
-    border: 1px solid rgba(200,200,200,0.5);
-    outline: none;
-    font-size: 16px;
-    padding: 7px 10px;
-    letter-spacing: 2px;
-    
+#login-form fieldset {
+  border: none;
+}
+
+#login-form legend {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+#login-form span:first-child {
+  color: dodgerblue;
+  font-size: 1.2rem;
+}
+
+.login-input {
+  width: 100%;
+  margin-bottom: 20px;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  outline: none;
+  font-size: 1.2rem;
+  padding: 10px 10px;
+  letter-spacing: 2px;
+  border-radius: 5px;
+}
+
+#login-submit-button {
+  @include mixins.flex-center;
+  width: 100%;
+  height: auto;
+  padding: 15px;
+  background-color: dodgerblue;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: 1.4rem;
+}
+
+.container-row {
+  width: 100%;
+  height: auto;
+  margin: 20px 0px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-auth-provider {
+  @include mixins.flex-center;
+  width: 48%;
+  height: auto;
+  padding: 15px;
+  font-size: 1rem;
+  border: variables.$medium-border;
+  border-radius: 5px;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
 }

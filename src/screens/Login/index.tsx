@@ -23,27 +23,38 @@ const Login = () => {
 
   return (
     <div id="login-container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="login-form">
         <fieldset>
-          <legend>Sign up</legend>
+          <legend>
+            Zaloguj się do <span>Messengera</span>
+          </legend>
 
-          <label htmlFor="login-form-email">Email</label>
+          <div className="container-row">
+            <button className="button-auth-provider">Google</button>
+            <button className="button-auth-provider">Facebook</button>
+          </div>
+
           <input
-            type="text"
-            id="login-form-email"
+            type="email"
+            name="email"
+            id="login-input-email"
+            className="login-input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
           />
 
-          <label htmlFor="login-form-password">Hasło</label>
           <input
             type="password"
-            id="login-form-password"
+            name="password"
+            id="login-input-password"
+            className="login-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
           />
 
-          <button>Sign in</button>
+          <button id="login-submit-button">Sign in</button>
         </fieldset>
       </form>
       <Link to="/register">Don't have an account yet? Sign up!</Link>
