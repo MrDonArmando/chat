@@ -1,0 +1,34 @@
+
+@use "../../../../scss//variables";
+
+#form-chat{
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    flex: 0 1 60px;
+ 
+}
+
+#input-chat{
+    width: 80%;
+    min-height: 40px;
+    height: auto;
+    padding: 3px 20px;
+    border-radius: 100px;
+    background-color: variables.$input-color;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+#submit-button-chat{
+    padding: 10px 10px;
+    background-color: white;
+    border-radius: 50px;
+    color: black;
+    outline: none;
+}
