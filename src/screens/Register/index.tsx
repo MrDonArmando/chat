@@ -32,45 +32,53 @@ const Register = () => {
     <div id="register-container">
       <form id="register-form" onSubmit={handleSubmit}>
         <fieldset>
-          <legend>Sign up</legend>
-
-          <label htmlFor="register-form-name">Nazwa użytkownika</label>
+          <legend>
+            Welcome to{" "}
+            <span className="register-text-highlight">Messenger</span>
+          </legend>
           <input
             type="text"
             id="register-form-name"
+            className="register-input"
+            placeholder="Username"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-
-          <label htmlFor="register-form-email">Email</label>
           <input
-            type="text"
+            type="email"
             id="register-form-email"
+            className="register-input"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-
-          <label htmlFor="register-form-password">Hasło</label>
           <input
             type="password"
             id="register-form-password"
+            placeholder="Password"
+            className="register-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-
-          <label htmlFor="register-form-password-confirmation">
-            Potwierdź hasło
-          </label>
           <input
             type="password"
             id="register-form-password-confirmation"
+            placeholder="Password confirmation"
+            className="register-input"
             value={passwordConfirmation}
             onChange={(e) => setPasswordConfirmation(e.target.value)}
           />
-          <button>Zarejestruj się</button>
+          <button id="register-submit-button">Sign up</button>
+
+          <div id="register-bottom-container">
+            <span> Already have an account?</span>
+
+            <Link id="register-bottom-container__link" to="/login">
+              Sign in here!
+            </Link>
+          </div>
         </fieldset>
       </form>
-      <Link to="/login">Already have an account? Sign in here!</Link>
     </div>
   );
 };

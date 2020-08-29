@@ -141,10 +141,9 @@ class Firebase {
   }
 
   async get10PreviousMessages() {
-    // TODO: Don't let user fetch too fast!
     if (!this.lastMessageSnapshot) return [];
 
-    const next10MessagesSnapshots = await this.db
+    const previous10MessageSnapshots = await this.db
       .collection("chats")
       .doc(this.chatID)
       .collection("messages")
@@ -154,9 +153,11 @@ class Firebase {
       .get();
 
     this.lastMessageSnapshot =
-      next10MessagesSnapshots.docs[next10MessagesSnapshots.docs.length - 1];
+      previous10MessageSnapshots.docs[
+        previous10MessageSnapshots.docs.length - 1
+      ];
 
-    return next10MessagesSnapshots.docs
+    return previous10MessageSnapshots.docs
       .map((doc) => ({
         ...doc.data(),
         id: doc.id,

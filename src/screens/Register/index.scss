@@ -1,25 +1,100 @@
-#register-container{
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@use "../../scss/mixins";
+@use "../../scss/variables";
+
+#register-container {
+  @include mixins.full-screen;
+  @include mixins.flex-center;
+  padding: 0px 20px;
+  background-color: rgb(240, 242, 245);
 }
 
-
-#register-form{
-    width: 400px;
-    height: auto;
+#register-form {
+  width: 100%;
+  height: auto;
+  background-color: white;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 5px;
 }
 
+@media screen and (min-width: variables.$bp-sm) {
+  #register-form {
+    width: 540px;
+  }
+}
 
-#register-form-name,#register-form-email,#register-form-password,#register-form-password-confirmation{
-    width: 100%;
-    margin-bottom: 20px;
-    border: 1px solid rgba(200,200,200,0.5);
-    outline: none;
-    font-size: 16px;
-    padding: 7px 10px;
-    letter-spacing: 2px;
-    
+#register-form fieldset {
+  border: none;
+}
+
+#register-form legend {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.register-text-highlight {
+  color: dodgerblue;
+  font-size: 1.2rem;
+}
+
+// #register-form-name,
+// #register-form-email,
+// #register-form-password,
+// #register-form-password-confirmation
+
+.register-input {
+  width: 100%;
+  margin-bottom: 20px;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  outline: none;
+  font-size: 1.2rem;
+  padding: 10px 10px;
+  letter-spacing: 2px;
+  border-radius: 5px;
+}
+
+#register-submit-button {
+  @include mixins.flex-center;
+  width: 100%;
+  height: auto;
+  padding: 15px;
+  background-color: dodgerblue;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: 1.4rem;
+}
+
+#register-submit-button {
+  @include mixins.flex-center;
+  width: 100%;
+  height: auto;
+  padding: 15px;
+  background-color: dodgerblue;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: 1.4rem;
+}
+
+#register-bottom-container {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#register-bottom-container span {
+  color: black;
+  font-size: 1rem;
+}
+
+#register-bottom-container__link {
+  text-decoration: none;
+  margin-left: 20px;
+  color: dodgerblue;
 }

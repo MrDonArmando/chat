@@ -35,7 +35,7 @@
   font-weight: 700;
 }
 
-#login-form span:first-child {
+#login-text-highlight {
   color: dodgerblue;
   font-size: 1.2rem;
 }
@@ -83,4 +83,21 @@
   background-color: transparent;
   outline: none;
   cursor: pointer;
+}
+
+#login-bottom-container {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#login-bottom-container span {
+  color: black;
+  font-size: 1rem;
+}
+
+#login-bottom-container__link {
+  text-decoration: none;
+  margin-left: 20px;
+  color: dodgerblue;
 }

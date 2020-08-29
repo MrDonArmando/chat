@@ -26,7 +26,7 @@ const Login = () => {
       <form onSubmit={handleSubmit} id="login-form">
         <fieldset>
           <legend>
-            Zaloguj się do <span>Messengera</span>
+            Welcome to <span className="login-text-highlight">Messengera</span>
           </legend>
 
           <div className="container-row">
@@ -55,9 +55,15 @@ const Login = () => {
           />
 
           <button id="login-submit-button">Sign in</button>
+          <div id="register-bottom-container">
+            <span> Don't have an account yet?</span>
+
+            <Link id="register-bottom-container__link" to="/register">
+              Sign up here!
+            </Link>
+          </div>
         </fieldset>
       </form>
-      <Link to="/register">Don't have an account yet? Sign up!</Link>
     </div>
   );
 };
