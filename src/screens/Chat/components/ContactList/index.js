@@ -3,7 +3,7 @@ import "./index.scss";
 import { Link } from "react-router-dom";
 
 const ContactList = ({ friendsInfo }) => {
-  const [currentFriend, setChosenFriend] = useState(0);
+  const [currentFriend, setCurrentFriend] = useState(0);
 
   useEffect(() => {
     //console.log("FRIENDS: ", friendsInfo);
@@ -16,7 +16,7 @@ const ContactList = ({ friendsInfo }) => {
 
         return (
           <li
-            onClick={() => setChosenFriend(index)}
+            onClick={() => setCurrentFriend(index)}
             className={`list-item ${isCurrent && "list-item--current"}`}
             key={id}
           >
