@@ -66,7 +66,7 @@ class Firebase {
           await transaction.get(currentUserRef)
         ).data();
 
-        let chatID = friends[friendID];
+        let chatID = friends && friends[friendID];
         if (!chatID) {
           const newChat = this.db.collection("chats").doc();
           chatID = newChat.id;
@@ -110,7 +110,7 @@ class Firebase {
       await this.db.collection("users").doc(this.auth.currentUser.uid).get()
     ).data();
 
-    if (!friends[friendID]) return [];
+    if (!(friends && friends[friendID])) return [];
 
     this.unsubscribe = this.db
       .collection("chats")
@@ -169,7 +169,7 @@ class Firebase {
         await this.db.collection("users").doc(this.auth.currentUser.uid).get()
       ).data();
 
-      if (!friends[friendID]) return [];
+      if (!(friends && friends[friendID])) return [];
 
       this.chatID = friends[friendID];
 
