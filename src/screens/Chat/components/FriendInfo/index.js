@@ -2,10 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./index.scss";
 
 const FriendInfo = ({ profilesDataOfChosenFriend }) => {
-  useEffect(() => {
-    console.log("XXX: ", profilesDataOfChosenFriend);
-  }, [profilesDataOfChosenFriend]);
-
   if (!profilesDataOfChosenFriend) return null;
 
   const { avatarURL, displayName } = profilesDataOfChosenFriend;

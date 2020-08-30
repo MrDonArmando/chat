@@ -15,10 +15,6 @@ const MessageForm = ({ friendID }: { friendID: string }) => {
     setMessage("");
   };
 
-  useEffect(() => {
-    //console.log("PARAMS: ", friendID);
-  });
-
   return (
     <form id="form-chat" onSubmit={submitMessage}>
       <input

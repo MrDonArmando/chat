@@ -24,7 +24,6 @@ const Chat = () => {
       try {
         const currentUserUID = firebase.getMyUID();
         const usersProfilesData = await firebase.getUsersProfilesData();
-        console.log("usersProfileData: ", usersProfilesData);
 
         const friendsProfilesData = usersProfilesData.filter(
           ({ userID }) => userID !== currentUserUID

@@ -22,6 +22,7 @@ const Spinner: React.FC<Props> = ({
 
     {Array.from({ length: 4 }).map((_, index) => (
       <div
+        key={index}
         style={{
           borderColor: `${borderColor} transparent transparent transparent`,
         }}

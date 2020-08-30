@@ -95,9 +95,6 @@ class Messages extends Component<Props & RouteProps> {
   };
 
   render() {
-    if (this.props.isFetching10PreviousMessages) {
-      console.log("FETCHING");
-    }
     return (
       <div id="messages-container" ref={this.messagesContainerRef}>
         <div className="spinner-container">

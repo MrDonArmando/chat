@@ -31,7 +31,6 @@ export const fetchLast20Messages = (friendID: string): AppThunk => async (
     dispatch(addError(err.message));
   } finally {
     if (getState().chat.messages.length > 0) {
-      console.log("HERE finally");
       firebase.cancelPreviousListener();
       firebase.listenForNewMessages(
         (messages: Message[]) => dispatch(addNewMessages(messages)),
@@ -85,7 +84,6 @@ export const sendMessage = (
     dispatch(addError(err.message));
   } finally {
     if (state.chat.messages.length === 0) {
-      console.log("HERE 0");
       firebase.cancelPreviousListener();
       firebase.listenForNewMessages(
         (messages: Message[]) => dispatch(addNewMessages(messages)),

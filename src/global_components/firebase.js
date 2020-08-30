@@ -125,12 +125,10 @@ class Firebase {
         if (querySnapshot.empty) {
           return [];
         }
-        console.log("SIZE: ", querySnapshot.size);
 
         const messages = [];
         querySnapshot.docChanges().forEach(function (message) {
           if (message.type === "added") {
-            console.log("NEW MESSAGE: ", message.doc.data());
             const { from, text, createdAt } = message.doc.data();
             messages.push({ from, text, createdAt, id: message.doc.id });
           }
@@ -207,26 +205,11 @@ class Firebase {
     return this.auth.currentUser.uid;
   }
 
-  getUserInfo() {
-    // const user = this.auth.currentUser;
-    // user.providerData.forEach(function (profile) {
-    //   console.log("Sign-in provider: " + profile.providerId);
-    //   console.log("  Provider-specific UID: " + profile.uid);
-    //   console.log("  Name: " + profile.displayName);
-    //   console.log("  Email: " + profile.email);
-    //   console.log("  Photo URL: " + profile.photoURL);
-    // });
-  }
-
   async changeProfilePicture(profilePicture) {
     return new Promise((resolve, reject) => {
       const profilePictureRef = this.storageRef.child(
         `profilePictures/${this.auth.currentUser.uid}`
       );
-
-      console.log("fullPath: ", profilePictureRef.fullPath);
-      console.log("name: ", profilePictureRef.name);
-      console.log("bucket: ", profilePictureRef.bucket);
 
       const uploadTask = profilePictureRef.put(profilePicture);
 
@@ -261,14 +244,23 @@ class Firebase {
 
   async getMyAvatarURL() {
     if (this.avatarURL) return this.avatarURL;
+    if (!(this.auth.currentUser && this.auth.currentUser.uid)) return null;
 
-    const avatarURL = await this.storageRef
-      .child(`profilePictures/${this.auth.currentUser.uid}`)
-      .getDownloadURL();
+    console.log("this.auth.currentUser.uid: ", this.auth.currentUser.uid);
 
-    this.avatarURL = avatarURL;
+    try {
+      const avatarURL = await this.storageRef
+        .child(`profilePictures/${this.auth.currentUser.uid}`)
+        .getDownloadURL();
 
-    return avatarURL;
+      console.log("avatarURL: ", avatarURL);
+
+      this.avatarURL = avatarURL;
+
+      return avatarURL;
+    } catch (err) {
+      console.log("ERR: ", err);
+    }
   }
 
   async getUsersNameAndID() {
@@ -282,8 +274,6 @@ class Firebase {
       return { displayName, userID: id };
     });
 
-    console.log("getUSersInfo: ", usersInfo);
-
     return usersInfo;
   }
 
@@ -292,12 +282,9 @@ class Firebase {
       .child("profilePictures")
       .listAll();
 
-    console.log("usersAvatarList: ", usersAvatarList);
     const URLsPromises = usersAvatarList.items.map((imageRef) =>
       imageRef.getDownloadURL()
     );
-
-    // console.log("URL promises: ", URLsPromises);
 
     const avatarURLs = await Promise.all(URLsPromises);
 
@@ -305,7 +292,6 @@ class Firebase {
       avatarURL,
       avatarID: avatarURL.slice(88, 116),
     }));
-    console.log("avatarData: ", avatarData);
 
     return avatarData;
   }
@@ -314,9 +300,6 @@ class Firebase {
     const usersNameAndID = await this.getUsersNameAndID();
     const usersAvatars = await this.getUsersAvatars();
     const usersAvatarsID = usersAvatars.map(({ avatarID }) => avatarID);
-
-    // console.log("usersNameAndID: ", usersNameAndID);
-    // console.log("usersAvatars: ", usersAvatars);
 
     const usersProfilesData = usersNameAndID.map(({ displayName, userID }) => {
       const indexOfAvatarID = usersAvatarsID.indexOf(userID);

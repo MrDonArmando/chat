@@ -9,8 +9,6 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     firebase.auth.onAuthStateChanged((user) => {
-      //console.log("onAuthStateChanged: ", user.uid);
-
       setCurrentUser(user);
       setPending(false);
     });

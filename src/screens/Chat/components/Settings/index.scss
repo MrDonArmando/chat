@@ -28,16 +28,17 @@
   align-content: flex-start;
   width: 100%;
   height: auto;
+  max-height: 0px;
   overflow: hidden;
-  transition: height 0.2s ease-in;
+  transition: max-height 0.4s ease-in-out;
   //background-color: yellow;
 
   &--opened {
-    height: 500px;
+    max-height: 600px;
   }
 
   &--closed {
-    height: 0px;
+    max-height: 0px;
   }
 }
 

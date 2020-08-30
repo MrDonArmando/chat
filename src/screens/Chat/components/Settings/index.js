@@ -33,6 +33,7 @@ const Settings = () => {
 
   useEffect(() => {
     const fetchAvatarUrl = async () => {
+      console.log("fetchAvatarUrl");
       const downloadedAvatarUrl = await firebase.getMyAvatarURL();
       setAvatarUrl(downloadedAvatarUrl);
     };
@@ -49,7 +50,7 @@ const Settings = () => {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImageDataUrl(reader.result);
-        console.log("reader result: ", reader.result);
+
         setIsModalOpen(true);
       });
       reader.readAsDataURL(e.target.files[0]);
@@ -86,7 +87,6 @@ const Settings = () => {
 
         blob.name = fileName;
         if (avatarUrl) {
-          console.log("BLOB: ", blob);
           window.URL.revokeObjectURL(avatarUrl);
         }
         const newAvatarUrl = window.URL.createObjectURL(blob);
@@ -109,8 +109,6 @@ const Settings = () => {
 
         setAvatarUrl(newAvatarUrl);
         const donwloadURL = await firebase.changeProfilePicture(blob);
-
-        console.log("Success: ", donwloadURL);
       } catch (err) {
         console.log("Error: ", err.message);
       } finally {
@@ -119,10 +117,6 @@ const Settings = () => {
       }
     }
   };
-
-  useEffect(() => {
-    console.log("imageDataUrl; ", imageDataUrl);
-  }, [imageDataUrl]);
 
   return (
     <div id="container-settings">

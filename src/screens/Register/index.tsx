@@ -11,10 +11,10 @@ import firebase from "../../global_components/firebase";
 import { AuthContext } from "../../global_components/AuthProvider";
 
 const Register = () => {
-  const [name, setName] = useState("donek");
-  const [email, setEmail] = useState("dominik1@onet.com.pl");
-  const [password, setPassword] = useState("dupadupa");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("dupadupa");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const history = useHistory();
 

@@ -6,8 +6,8 @@ import firebase from "../../global_components/firebase";
 
 const Login = () => {
   const history = useHistory();
-  const [email, setEmail] = useState("dominik5@onet.com.pl");
-  const [password, setPassword] = useState("dupadupa");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -26,13 +26,13 @@ const Login = () => {
       <form onSubmit={handleSubmit} id="login-form">
         <fieldset>
           <legend>
-            Welcome to <span className="login-text-highlight">Messengera</span>
+            Welcome to <span id="login-text-highlight">Messenger</span>
           </legend>
-
+          {/* 
           <div className="container-row">
             <button className="button-auth-provider">Google</button>
             <button className="button-auth-provider">Facebook</button>
-          </div>
+          </div> */}
 
           <input
             type="email"
