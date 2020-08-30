@@ -26,7 +26,7 @@ const MessageForm = ({ friendID }: { friendID: string }) => {
         id="input-chat"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        placeholder="Wpisz wiadomość..."
+        placeholder="Type message..."
       />
       <button id="submit-chat-button">
         <RiSendPlane2Fill id="submit-chat-button__icon" />

@@ -2,22 +2,24 @@ import React, { useState, useEffect } from "react";
 import "./index.scss";
 import { Link } from "react-router-dom";
 
-const ContactList = ({ friendsInfo }) => {
-  const [currentFriend, setCurrentFriend] = useState(0);
-
+const ContactList = ({
+  friendsProfilesData,
+  indexOfChosenFriend,
+  setIndexOfChosenFriend,
+}) => {
   useEffect(() => {
-    //console.log("FRIENDS: ", friendsInfo);
-  }, [friendsInfo]);
+    //console.log("FRIENDS: ", friendsProfilesData);
+  }, [friendsProfilesData]);
 
   return (
     <div id="contact-list-container">
-      {friendsInfo.map(({ displayName, userID, avatarURL }, index) => {
-        const isCurrent = currentFriend === index;
+      {friendsProfilesData.map(({ displayName, userID, avatarURL }, index) => {
+        const isChosenFriend = indexOfChosenFriend === index;
 
         return (
           <li
-            onClick={() => setCurrentFriend(index)}
-            className={`list-item ${isCurrent && "list-item--current"}`}
+            onClick={() => setIndexOfChosenFriend(index)}
+            className={`list-item ${isChosenFriend && "list-item--current"}`}
             key={userID}
           >
             <Link to={`/chat/${userID}`} className="list-item__link">

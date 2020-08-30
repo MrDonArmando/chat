@@ -16,7 +16,8 @@ interface Friend {
 
 const Chat = () => {
   const history = useHistory();
-  const [friendsInfo, setFriendsInfo] = useState<Friend[]>([]);
+  const [friendsProfilesData, setFriendsProfilesData] = useState<Friend[]>([]);
+  const [indexOfChosenFriend, setIndexOfChosenFriend] = useState(0);
 
   useEffect(() => {
     const fetchUsersProfilesData = async () => {
@@ -29,7 +30,7 @@ const Chat = () => {
           ({ userID }) => userID !== currentUserUID
         );
 
-        setFriendsInfo(friendsProfilesData);
+        setFriendsProfilesData(friendsProfilesData);
       } catch (err) {
         console.log("ERROR IN fetchUsersProfilesData: ", err);
       }
@@ -39,12 +40,16 @@ const Chat = () => {
   }, []);
 
   const pathName = useLocation().pathname;
-  if (pathName === "/chat" && friendsInfo.length)
-    history.replace(`/chat/${friendsInfo[0].userID}`);
+  if (pathName === "/chat" && friendsProfilesData.length)
+    history.replace(`/chat/${friendsProfilesData[0].userID}`);
 
   return (
     <div className="container-screen">
-      <ContactList friendsInfo={friendsInfo} />
+      <ContactList
+        friendsProfilesData={friendsProfilesData}
+        indexOfChosenFriend={indexOfChosenFriend}
+        setIndexOfChosenFriend={setIndexOfChosenFriend}
+      />
       <div id="container-chat">
         <Switch>
           <Route

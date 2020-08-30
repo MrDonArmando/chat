@@ -105,7 +105,7 @@ class Messages extends Component<Props & RouteProps> {
             <Spinner />
           ) : (
             <span className="no-more-messages">
-              To już wszystkie wiadomości w tej konwersacji
+              These are all messages in this conversation
             </span>
           )}
         </div>
