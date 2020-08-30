@@ -2,6 +2,7 @@ import React, { useState, useEffect, FormEvent } from "react";
 import "./index.scss";
 import { useDispatch } from "react-redux";
 import { sendMessage } from "../../../../redux/chat/actions";
+import { RiSendPlane2Fill } from "react-icons/ri";
 
 const MessageForm = ({ friendID }: { friendID: string }) => {
   const dispatch = useDispatch();
@@ -27,7 +28,9 @@ const MessageForm = ({ friendID }: { friendID: string }) => {
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Wpisz wiadomość..."
       />
-      <button id="submit-button-chat">Send</button>
+      <button id="submit-chat-button">
+        <RiSendPlane2Fill id="submit-chat-button__icon" />
+      </button>
     </form>
   );
 };
