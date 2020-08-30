@@ -105,6 +105,10 @@ class Firebase {
     return this.db.collection("users").get();
   }
 
+  cancelPreviousListener() {
+    if (this.unsubscribe) this.unsubscribe();
+  }
+
   async listenForNewMessages(dispatchMessages, friendID) {
     const { friends } = await (
       await this.db.collection("users").doc(this.auth.currentUser.uid).get()
@@ -112,7 +116,7 @@ class Firebase {
 
     if (!friends[friendID]) return [];
 
-    this.db
+    this.unsubscribe = this.db
       .collection("chats")
       .doc(friends[friendID])
       .collection("messages")
