@@ -1,0 +1,52 @@
+@use "../../../../scss//mixins.scss";
+@use "../../../../scss/variables";
+
+#container-settings {
+  width: 100%;
+  height: auto;
+}
+
+#container-settings__title {
+  width: 100%;
+  min-height: 50px;
+  height: auto;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  border-bottom: variables.$thin-border;
+}
+
+.container-settings__collapsible {
+  @include mixins.flex-center;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  transition: height 0.2s ease-in;
+}
+
+.container-settings__collapsible--opened {
+  height: 500px;
+}
+
+.container-settings__collapsible--closed {
+  height: 0px;
+}
+
+#settings-title {
+  font-size: 1rem;
+  color: white;
+  letter-spacing: 1px;
+}
+
+.settings-icon {
+  color: white;
+}
+
+.settings-icon--rotated {
+  transform: rotate(180deg);
+}

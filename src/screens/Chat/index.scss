@@ -1,19 +1,18 @@
 @use "../../scss/mixins";
 @use "../../scss/variables";
 
-.container-screen{
-    @include mixins.flex-center;
-    @include mixins.full-screen;
-    background-color: variables.$main-color;
+.container-screen {
+  @include mixins.flex-center;
+  @include mixins.full-screen;
+  background-color: variables.$main-color;
 }
 
-
-#container-chat{
-    border-left: variables.$chat-border;
-    border-right: variables.$chat-border;
-    display: flex;
-    flex: 2 1 100px;
-    flex-flow: column wrap;
-    height: 100vh;
-    position: relative; 
+#container-chat {
+  border-left: variables.$thin-border;
+  border-right: variables.$thin-border;
+  display: flex;
+  flex: 2 1 100px;
+  flex-flow: column wrap;
+  height: 100vh;
+  position: relative;
 }

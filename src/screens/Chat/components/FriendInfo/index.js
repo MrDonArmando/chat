@@ -6,6 +6,7 @@ import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import Modal from "../Modal";
 import Spinner from "../Spinner";
+import Settings from "../Settings";
 
 const FriendInfo = ({ friendName }) => {
   const history = useHistory();
@@ -136,6 +137,7 @@ const FriendInfo = ({ friendName }) => {
 
   return (
     <div id="friend-info-container">
+      <Settings />
       <div id="avatar-and-name-container">
         <img
           src={

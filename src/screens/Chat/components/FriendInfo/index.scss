@@ -1,82 +1,88 @@
 @use "../../../../scss//mixins";
 @use "../../../../scss//variables";
 
-#friend-info-container{
-    height: auto;
-    min-height: 100vh;
-    flex: 1;
-};
-
-#avatar-and-name-container{
-    @include mixins.flex-center;
-    width: 100%;
-    height: auto;
-    min-height: 200px;
-    flex-direction: column;
-    padding: 30px 20px; 
+#friend-info-container {
+  height: 100vh;
+  min-height: 100vh;
+  overflow: scroll;
+  flex: 1 1 0px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
 }
 
-
-#friend-avatar{
-    width: 100px;
-    height: 100px;
-    border-radius: 100px;
+#friend-info-container::-webkit-scrollbar {
+  display: none;
 }
 
-#friend-name{
-    margin-top: 20px;
+#avatar-and-name-container {
+  @include mixins.flex-center;
+  width: 100%;
+  height: auto;
+  min-height: 200px;
+  flex-direction: column;
+  padding: 30px 20px;
 }
 
-#modal{
-    @include mixins.full-screen;
-    @include mixins.flex-center;
-    background-color: variables.$main-color;
-    z-index: 1000;
-    padding: 20px;
-    flex-direction: column;
-    flex-wrap: wrap;
-
-    @media (min-width: 600px){
-        width: 600px;
-        height: 600px;
-    }
+#friend-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
 }
 
-#modal-image-container{
-    @include mixins.flex-center;
-    width: 100%;
-    flex: 0 1 450px;
-    background-image: url("../../../../images/transparent_bg.jpg");
-    border: 2px solid black;
+#friend-name {
+  margin-top: 20px;
 }
 
-#modal-buttons-container{
-    width: 100%;
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+#modal {
+  @include mixins.full-screen;
+  @include mixins.flex-center;
+  background-color: variables.$main-color;
+  z-index: 1000;
+  padding: 20px;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  @media (min-width: 600px) {
+    width: 600px;
+    height: 600px;
+  }
 }
 
-.modal-button{
-    @include mixins.flex-center;
-    width: 150px;
-    height: auto;
-    padding: 6px 12px;
-    min-height: 40px;
-    color: white;
-    font-size: 18px;
-    outline: none;
-    border:none;
-    border-radius: 3px;
-    cursor: pointer;
-    
-    &--save{
-        background-color: variables.$dodgerblue;
-    }
+#modal-image-container {
+  @include mixins.flex-center;
+  width: 100%;
+  flex: 0 1 450px;
+  background-image: url("../../../../images/transparent_bg.jpg");
+  border: 2px solid black;
+}
 
-    &--cancel{
-        background-color:#808080;
-    }
+#modal-buttons-container {
+  width: 100%;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-button {
+  @include mixins.flex-center;
+  width: 150px;
+  height: auto;
+  padding: 6px 12px;
+  min-height: 40px;
+  color: white;
+  font-size: 18px;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+
+  &--save {
+    background-color: variables.$dodgerblue;
+  }
+
+  &--cancel {
+    background-color: #808080;
+  }
 }
