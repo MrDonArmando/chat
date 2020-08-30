@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./index.scss";
 import ContactList from "./components/ContactList";
-import FriendInfo from "./components/FriendInfo";
+import RightPanel from "./components/RightPanel";
 import firebase from "../../global_components/firebase";
 import { useHistory, useLocation } from "react-router-dom";
 import Messages from "./components/Messages";
@@ -63,7 +63,7 @@ const Chat = () => {
           />
         </Switch>
       </div>
-      <FriendInfo friendName="Donek" />
+      <RightPanel friendName="Donek" />
     </div>
   );
 };

@@ -3,7 +3,7 @@ import "./index.scss";
 
 import Settings from "../Settings";
 
-const FriendInfo = ({ friendName }) => {
+const RightPanel = ({ friendName }) => {
   // const logout = () => {
   //   firebase
   //     .logout()
@@ -20,4 +20,4 @@ const FriendInfo = ({ friendName }) => {
   );
 };
 
-export default FriendInfo;
+export default RightPanel;

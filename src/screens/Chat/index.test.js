@@ -4,7 +4,7 @@ import { expect } from "chai";
 import App from "./index";
 import Chat from ".";
 import ContactList from "../ContactList";
-import FriendInfo from "../FriendInfo";
+import RightPanel from "../RightPanel";
 
 it("renders without crashing", () => {
   const wrapper = shallow(<App />);
@@ -16,7 +16,7 @@ it("renders without crashing", () => {
       <div className="container-main">
         <ContactList />
         <Chat />
-        <FriendInfo />
+        <RightPanel />
       </div>
     )
   ).to.equal(true);
