@@ -1,0 +1,30 @@
+@use "../../../../scss/mixins";
+
+#friend-info-container {
+  @include mixins.flex-center;
+  width: 100%;
+  height: auto;
+}
+
+#friend-avatar-container {
+  @include mixins.flex-center;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+#friend-avatar {
+  min-width: 50px;
+  min-height: 50px;
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+}
+
+#friend-name {
+  color: white;
+  font-size: 1.2rem;
+  margin-top: 5px;
+}

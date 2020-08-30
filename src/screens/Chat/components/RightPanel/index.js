@@ -1,9 +1,9 @@
 import React from "react";
 import "./index.scss";
-
 import Settings from "../Settings";
+import FriendInfo from "../FriendInfo";
 
-const RightPanel = ({ friendName }) => {
+const RightPanel = ({ profilesDataOfChosenFriend }) => {
   // const logout = () => {
   //   firebase
   //     .logout()
@@ -14,8 +14,9 @@ const RightPanel = ({ friendName }) => {
   // };
 
   return (
-    <div id="friend-info-container">
+    <div id="right-panel-container">
       <Settings />
+      <FriendInfo profilesDataOfChosenFriend={profilesDataOfChosenFriend} />
     </div>
   );
 };

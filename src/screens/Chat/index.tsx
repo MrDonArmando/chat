@@ -63,7 +63,9 @@ const Chat = () => {
           />
         </Switch>
       </div>
-      <RightPanel friendName="Donek" />
+      <RightPanel
+        profilesDataOfChosenFriend={friendsProfilesData[indexOfChosenFriend]}
+      />
     </div>
   );
 };

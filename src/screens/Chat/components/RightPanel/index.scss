@@ -1,15 +1,15 @@
 @use "../../../../scss//mixins";
 @use "../../../../scss//variables";
 
-#friend-info-container {
+#right-panel-container {
   height: 100vh;
   min-height: 100vh;
   overflow: scroll;
   flex: 1 1 0px;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none;
-}
 
-#friend-info-container::-webkit-scrollbar {
-  display: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
