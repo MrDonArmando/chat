@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./index.scss";
-import { useHistory } from "react-router";
 import firebase from "../../../../global_components/firebase";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
@@ -12,14 +11,10 @@ const Settings = () => {
   const [isSettingsContainerOpened, setIsSettingsContainerOpened] = useState(
     false
   );
-  const history = useHistory();
   const [crop, setCrop] = useState({
     minWidth: 80,
-    //minHeight: 80,
     width: 80,
-    //height: 100,
     maxWidth: 100,
-    //maxHeight: 50,
     x: 10,
     y: 10,
     aspect: 1,
@@ -37,8 +32,6 @@ const Settings = () => {
   };
 
   useEffect(() => {
-    console.log("Avatar URL: ", avatarUrl);
-
     const fetchAvatarUrl = async () => {
       const downloadedAvatarUrl = await firebase.getMyAvatarURL();
       setAvatarUrl(downloadedAvatarUrl);
@@ -48,13 +41,10 @@ const Settings = () => {
   }, []);
 
   const onImageLoaded = (image) => {
-    console.log("onImageLoaded: ", image);
     imageRef.current = image;
   };
 
   const handleImageChange = (e) => {
-    console.log("handleImageChange: ", e.target.value);
-
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
@@ -91,7 +81,6 @@ const Settings = () => {
     return new Promise((resolve, reject) => {
       canvas.toBlob((blob) => {
         if (!blob) {
-          //reject(new Error('Canvas is empty'));
           return;
         }
 

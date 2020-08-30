@@ -101,10 +101,6 @@ class Firebase {
     }
   }
 
-  getUsers() {
-    return this.db.collection("users").get();
-  }
-
   cancelPreviousListener() {
     if (this.unsubscribe) this.unsubscribe();
   }
@@ -275,7 +271,66 @@ class Firebase {
     return avatarURL;
   }
 
-  async getFriendsAvatarURLs() {}
+  async getUsersNameAndID() {
+    const querySnapshot = await this.db.collection("users").get();
+
+    const usersInfo = querySnapshot.docs.map((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      const displayName = doc.data().displayName;
+      const { id } = doc;
+
+      return { displayName, userID: id };
+    });
+
+    console.log("getUSersInfo: ", usersInfo);
+
+    return usersInfo;
+  }
+
+  async getUsersAvatars() {
+    const usersAvatarList = await this.storageRef
+      .child("profilePictures")
+      .listAll();
+
+    console.log("usersAvatarList: ", usersAvatarList);
+    const URLsPromises = usersAvatarList.items.map((imageRef) =>
+      imageRef.getDownloadURL()
+    );
+
+    // console.log("URL promises: ", URLsPromises);
+
+    const avatarURLs = await Promise.all(URLsPromises);
+
+    const avatarData = avatarURLs.map((avatarURL) => ({
+      avatarURL,
+      avatarID: avatarURL.slice(88, 116),
+    }));
+    console.log("avatarData: ", avatarData);
+
+    return avatarData;
+  }
+
+  async getUsersProfilesData() {
+    const usersNameAndID = await this.getUsersNameAndID();
+    const usersAvatars = await this.getUsersAvatars();
+    const usersAvatarsID = usersAvatars.map(({ avatarID }) => avatarID);
+
+    // console.log("usersNameAndID: ", usersNameAndID);
+    // console.log("usersAvatars: ", usersAvatars);
+
+    const usersProfilesData = usersNameAndID.map(({ displayName, userID }) => {
+      const indexOfAvatarID = usersAvatarsID.indexOf(userID);
+      if (indexOfAvatarID === -1)
+        return { displayName, userID, avatarURL: null };
+      return {
+        displayName,
+        userID,
+        avatarURL: usersAvatars[indexOfAvatarID].avatarURL,
+      };
+    });
+
+    return usersProfilesData;
+  }
 }
 
 export default new Firebase();

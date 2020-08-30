@@ -3,58 +3,47 @@ import "./index.scss";
 import ContactList from "./components/ContactList";
 import FriendInfo from "./components/FriendInfo";
 import firebase from "../../global_components/firebase";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import Messages from "./components/Messages";
 import MessageForm from "./components/MessageForm";
-import { useDispatch } from "react-redux";
-import { fetch10PreviousMessages } from "../../redux/chat/actions";
 import { Switch, Route } from "react-router-dom";
 
 interface Friend {
-  id: string;
+  userID: string;
   displayName: string;
+  avatarURL: URL;
 }
 
 const Chat = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
-
   const [friendsInfo, setFriendsInfo] = useState<Friend[]>([]);
 
   useEffect(() => {
-    const getFriendsInfo = async () => {
+    const fetchUsersProfilesData = async () => {
       try {
         const currentUserUID = firebase.getMyUID();
-        const querySnapshot = await firebase.getUsers();
+        const usersProfilesData = await firebase.getUsersProfilesData();
+        console.log("usersProfileData: ", usersProfilesData);
 
-        const usersInfo = querySnapshot.docs.map((doc) => {
-          // doc.data() is never undefined for query doc snapshots
-          const displayName = doc.data().displayName;
-          const { id } = doc;
+        const friendsProfilesData = usersProfilesData.filter(
+          ({ userID }) => userID !== currentUserUID
+        );
 
-          return { displayName, id };
-        });
-
-        const friendsInfo = usersInfo.filter(({ id }) => id !== currentUserUID);
-
-        setFriendsInfo(friendsInfo);
+        setFriendsInfo(friendsProfilesData);
       } catch (err) {
-        console.log("ERROR IN getFriendsInfo: ", err);
+        console.log("ERROR IN fetchUsersProfilesData: ", err);
       }
     };
 
-    getFriendsInfo();
+    fetchUsersProfilesData();
   }, []);
 
   const pathName = useLocation().pathname;
   if (pathName === "/chat" && friendsInfo.length)
-    history.replace(`/chat/${friendsInfo[0].id}`);
+    history.replace(`/chat/${friendsInfo[0].userID}`);
 
   return (
     <div className="container-screen">
-      {/* <button onClick={getData}>Get users</button>
- 
-      <button onClick={getUserInfo}>Get user info</button> */}
       <ContactList friendsInfo={friendsInfo} />
       <div id="container-chat">
         <Switch>

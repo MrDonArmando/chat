@@ -11,18 +11,22 @@ const ContactList = ({ friendsInfo }) => {
 
   return (
     <div id="contact-list-container">
-      {friendsInfo.map(({ displayName, id }, index) => {
+      {friendsInfo.map(({ displayName, userID, avatarURL }, index) => {
         const isCurrent = currentFriend === index;
 
         return (
           <li
             onClick={() => setCurrentFriend(index)}
             className={`list-item ${isCurrent && "list-item--current"}`}
-            key={id}
+            key={userID}
           >
-            <Link to={`/chat/${id}`} className="list-item__link">
+            <Link to={`/chat/${userID}`} className="list-item__link">
               <img
-                src={require("../../../../images/default_profile_picture.jpg")}
+                src={
+                  avatarURL
+                    ? avatarURL
+                    : require("../../../../images/default_profile_picture.jpg")
+                }
                 alt="Profile picture"
                 className="list-item__avatar"
                 width="50"
