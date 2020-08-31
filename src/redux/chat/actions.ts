@@ -77,9 +77,7 @@ export const sendMessage = (
   const state = getState();
 
   try {
-    firebase.sendMessage(message, friendID).then(() => {
-      console.log("sendMessage");
-    });
+    firebase.sendMessage(message, friendID).then(() => {});
   } catch (err) {
     dispatch(addError(err.message));
   } finally {

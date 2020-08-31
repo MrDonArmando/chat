@@ -33,7 +33,6 @@ const Settings = () => {
 
   useEffect(() => {
     const fetchAvatarUrl = async () => {
-      console.log("fetchAvatarUrl");
       const downloadedAvatarUrl = await firebase.getMyAvatarURL();
       setAvatarUrl(downloadedAvatarUrl);
     };

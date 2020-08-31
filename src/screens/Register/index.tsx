@@ -30,7 +30,6 @@ const Register = () => {
     firebase
       .register(name, email, password)
       .then((res) => {
-        console.log("XXXXXXXXXXXXX");
         history.push("/login");
       })
       .catch(({ message }) => {
