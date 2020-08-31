@@ -8,6 +8,7 @@ const Login = () => {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -18,7 +19,10 @@ const Login = () => {
         }
         history.replace("/chat");
       })
-      .catch((err) => console.log("ERR: ", err));
+      .catch(({ message }) => {
+        console.log("ERR: ", message);
+        setLoginError(message);
+      });
   };
 
   return (
@@ -53,6 +57,10 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
+
+          <div id="login-error-container">
+            {loginError && <span id="login-error">{loginError}</span>}
+          </div>
 
           <button id="login-submit-button">Sign in</button>
           <div id="register-bottom-container">

@@ -102,3 +102,15 @@
   margin-left: 20px;
   color: dodgerblue;
 }
+
+#login-error-container {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+#login-error {
+  color: crimson;
+  font-size: 1rem;
+  letter-spacing: 1px;
+}

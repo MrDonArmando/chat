@@ -15,17 +15,28 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [registerError, setRegisterError] = useState("");
 
   const history = useHistory();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+
+    if (password !== passwordConfirmation) {
+      setRegisterError("Passwords are different");
+      return;
+    }
+
     firebase
       .register(name, email, password)
       .then((res) => {
+        console.log("XXXXXXXXXXXXX");
         history.push("/login");
       })
-      .catch((err) => console.log("REGISTER ERR: ", err));
+      .catch(({ message }) => {
+        console.log("REGISTER ERR: ", message);
+        setRegisterError(message);
+      });
   };
 
   return (
@@ -68,6 +79,11 @@ const Register = () => {
             value={passwordConfirmation}
             onChange={(e) => setPasswordConfirmation(e.target.value)}
           />
+
+          <div id="register-error-container">
+            {registerError && <span id="register-error">{registerError}</span>}
+          </div>
+
           <button id="register-submit-button">Sign up</button>
 
           <div id="register-bottom-container">

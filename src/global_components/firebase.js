@@ -27,26 +27,29 @@ class Firebase {
   }
 
   async register(name, email, password) {
-    try {
-      const cred = await this.auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      const { user } = cred;
+    return new Promise(async (resolve, reject) => {
+      try {
+        const cred = await this.auth.createUserWithEmailAndPassword(
+          email,
+          password
+        );
+        const { user } = cred;
 
-      await user.updateProfile({
-        displayName: name,
-      });
+        await user.updateProfile({
+          displayName: name,
+        });
 
-      await this.db.collection("users").doc(user.uid).set({
-        exists: true,
-        displayName: user.displayName,
-      });
+        await this.db.collection("users").doc(user.uid).set({
+          exists: true,
+          displayName: user.displayName,
+        });
 
-      return "Success";
-    } catch (err) {
-      console.log("REGISTER ERROR: ", err);
-    }
+        resolve("Success");
+      } catch (err) {
+        console.log("REGISTER ERROR: ", err);
+        reject(err);
+      }
+    });
   }
 
   logout() {
@@ -90,6 +93,7 @@ class Firebase {
           );
         }
 
+        console.log("TRANSACTION ");
         this.db.collection("chats").doc(chatID).collection("messages").add({
           from: this.auth.currentUser.uid,
           text: message,
