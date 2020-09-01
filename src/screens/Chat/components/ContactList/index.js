@@ -1,12 +1,18 @@
 import React from "react";
 import "./index.scss";
 import { Link } from "react-router-dom";
+import firebase from "../../../../global_components/firebase";
 
 const ContactList = ({
   friendsProfilesData,
   indexOfChosenFriend,
   setIndexOfChosenFriend,
 }) => {
+  const handleClick = async (index, userID) => {
+    setIndexOfChosenFriend(index);
+    firebase.createChat(userID);
+  };
+
   return (
     <div id="contact-list-container">
       {friendsProfilesData.map(({ displayName, userID, avatarURL }, index) => {
@@ -14,7 +20,7 @@ const ContactList = ({
 
         return (
           <li
-            onClick={() => setIndexOfChosenFriend(index)}
+            onClick={() => handleClick(index, userID)}
             className={`list-item ${isChosenFriend && "list-item--current"}`}
             key={userID}
           >

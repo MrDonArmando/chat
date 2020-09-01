@@ -30,13 +30,38 @@ export const fetchLast20Messages = (friendID: string): AppThunk => async (
     console.log("error in fetchLast20Messages: ", err.message);
     dispatch(addError(err.message));
   } finally {
-    if (getState().chat.messages.length > 0) {
-      firebase.cancelPreviousListener();
-      firebase.listenForNewMessages(
-        (messages: Message[]) => dispatch(addNewMessages(messages)),
-        friendID
-      );
+    firebase.cancelPreviousListener();
+    firebase.listenForNewMessages(
+      (messages: Message[]) => dispatch(addNewMessages(messages)),
+      friendID
+    );
+  }
+};
+
+export const sendMessage = (
+  message: string,
+  friendID: string
+): AppThunk => async (dispatch, getState) => {
+  try {
+    await firebase.sendMessage(message, friendID);
+  } catch (err) {
+    dispatch(addError(err.message));
+  }
+};
+
+export const fetch10PreviousMessages = (): AppThunk => async (dispatch) => {
+  dispatch(startFetching10PreviousMessages());
+  try {
+    const previous10Messages = await firebase.get10PreviousMessages();
+    if (previous10Messages === undefined) {
+      add10PreviousMessages([]);
+    } else {
+      dispatch(stopFetching10PreviousMessages());
+      dispatch(add10PreviousMessages(previous10Messages));
     }
+  } catch (err) {
+    console.log("error in fetchLast10Messages: ", err.message);
+    dispatch(addError(err.message));
   }
 };
 
@@ -67,48 +92,6 @@ const addNewMessages = (messages: Message[]) => ({
     messages,
   },
 });
-
-export const sendMessage = (
-  message: string,
-  friendID: string
-): AppThunk => async (dispatch, getState) => {
-  //dispatch(addNewMessages([{from: firebase.getMyUID(),  }]))
-
-  const state = getState();
-
-  try {
-    console.log("1");
-    await firebase.sendMessage(message, friendID);
-    console.log("2");
-    if (state.chat.messages.length === 0) {
-      console.log("3");
-      firebase.cancelPreviousListener();
-      console.log("4");
-      firebase.listenForNewMessages(
-        (messages: Message[]) => dispatch(addNewMessages(messages)),
-        friendID
-      );
-    }
-  } catch (err) {
-    dispatch(addError(err.message));
-  }
-};
-
-export const fetch10PreviousMessages = (): AppThunk => async (dispatch) => {
-  dispatch(startFetching10PreviousMessages());
-  try {
-    const previous10Messages = await firebase.get10PreviousMessages();
-    if (previous10Messages === undefined) {
-      add10PreviousMessages([]);
-    } else {
-      dispatch(stopFetching10PreviousMessages());
-      dispatch(add10PreviousMessages(previous10Messages));
-    }
-  } catch (err) {
-    console.log("error in fetchLast10Messages: ", err.message);
-    dispatch(addError(err.message));
-  }
-};
 
 const add10PreviousMessages = (messages: Message[]) => ({
   type: ADD_10_PREVIOUS_MESSAGES,

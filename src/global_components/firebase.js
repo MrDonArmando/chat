@@ -65,14 +65,17 @@ class Firebase {
     try {
       await this.db.runTransaction(async (transaction) => {
         const currentUser = await transaction.get(currentUserRef);
-        const currentUserFriends = await currentUser.data();
+        const currentUserFriends = await currentUser.data().friends;
 
         const chatID = currentUserFriends && currentUserFriends[friendID];
-
+        console.log("old chatID: ", chatID);
         if (chatID) return;
 
         const newChat = this.db.collection("chats").doc();
+        newChat.set({ exists: true });
         const newChatID = newChat.id;
+
+        console.log("newChatID: ", newChatID);
 
         currentUserRef.set(
           {
@@ -102,38 +105,19 @@ class Firebase {
       .collection("users")
       .doc(this.auth.currentUser.uid);
 
-    const friendRef = this.db.collection("users").doc(friendID);
-
     try {
       await this.db.runTransaction(async (transaction) => {
-        const { friends } = await (
-          await transaction.get(currentUserRef)
-        ).data();
+        const currentUser = await transaction.get(currentUserRef);
+        const currentUserFriends = await currentUser.data().friends;
 
-        let chatID = friends && friends[friendID];
+        console.log("currentUser: ", currentUser);
+        console.log("currentUserFriends", currentUserFriends);
 
-        if (!chatID) {
-          const newChat = this.db.collection("chats").doc();
-          chatID = newChat.id;
+        const chatID = currentUserFriends && currentUserFriends[friendID];
 
-          currentUserRef.set(
-            {
-              friends: {
-                [friendID]: chatID,
-              },
-            },
-            { merge: true }
-          );
+        console.log("sendMessage chatID: ", chatID);
 
-          friendRef.set(
-            {
-              friends: {
-                [this.auth.currentUser.uid]: chatID,
-              },
-            },
-            { merge: true }
-          );
-        }
+        if (!chatID) return;
 
         this.db.collection("chats").doc(chatID).collection("messages").add({
           from: this.auth.currentUser.uid,
