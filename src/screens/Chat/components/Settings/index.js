@@ -32,12 +32,16 @@ const Settings = () => {
   };
 
   useEffect(() => {
-    const fetchAvatarUrl = async () => {
-      const downloadedAvatarUrl = await firebase.getMyAvatarURL();
-      setAvatarUrl(downloadedAvatarUrl);
+    const fetchAvatarURL = async () => {
+      try {
+        const downloadedAvatarUrl = await firebase.getMyAvatarURL();
+        setAvatarUrl(downloadedAvatarUrl);
+      } catch (err) {
+        console.log("ERROR -- fetchAvatarURL: ", err);
+      }
     };
 
-    fetchAvatarUrl();
+    fetchAvatarURL();
   }, []);
 
   const onImageLoaded = (image) => {
