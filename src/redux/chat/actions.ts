@@ -77,17 +77,17 @@ export const sendMessage = (
   const state = getState();
 
   try {
-    firebase.sendMessage(message, friendID).then(() => {});
+    firebase.sendMessage(message, friendID).then(() => {
+      if (state.chat.messages.length === 0) {
+        firebase.cancelPreviousListener();
+        firebase.listenForNewMessages(
+          (messages: Message[]) => dispatch(addNewMessages(messages)),
+          friendID
+        );
+      }
+    });
   } catch (err) {
     dispatch(addError(err.message));
-  } finally {
-    if (state.chat.messages.length === 0) {
-      firebase.cancelPreviousListener();
-      firebase.listenForNewMessages(
-        (messages: Message[]) => dispatch(addNewMessages(messages)),
-        friendID
-      );
-    }
   }
 };
 

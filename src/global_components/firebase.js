@@ -65,15 +65,18 @@ class Firebase {
 
     try {
       await this.db.runTransaction(async (transaction) => {
+        console.log("1111111111111111");
         const { friends } = await (
           await transaction.get(currentUserRef)
         ).data();
-
+        console.log("2");
         let chatID = friends && friends[friendID];
+        console.log("chatID: ", chatID);
+
         if (!chatID) {
           const newChat = this.db.collection("chats").doc();
           chatID = newChat.id;
-
+          console.log("transaction runs");
           currentUserRef.set(
             {
               friends: {
@@ -113,6 +116,8 @@ class Firebase {
     const { friends } = await (
       await this.db.collection("users").doc(this.auth.currentUser.uid).get()
     ).data();
+
+    console.log("listening for new messages: ", friends && friends[friendID]);
 
     if (!(friends && friends[friendID])) return [];
 
@@ -250,14 +255,10 @@ class Firebase {
     if (this.avatarURL) return this.avatarURL;
     if (!(this.auth.currentUser && this.auth.currentUser.uid)) return null;
 
-    console.log("this.auth.currentUser.uid: ", this.auth.currentUser.uid);
-
     try {
       const avatarURL = await this.storageRef
         .child(`profilePictures/${this.auth.currentUser.uid}`)
         .getDownloadURL();
-
-      console.log("avatarURL: ", avatarURL);
 
       this.avatarURL = avatarURL;
 
