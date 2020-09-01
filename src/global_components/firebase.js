@@ -4,14 +4,14 @@ import "firebase/auth";
 import "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCIakTSkpWOX82pcci0K8ezXOf1jjaOjSA",
-  authDomain: "test-b7db4.firebaseapp.com",
-  databaseURL: "https://test-b7db4.firebaseio.com",
-  projectId: "test-b7db4",
-  storageBucket: "test-b7db4.appspot.com",
-  messagingSenderId: "432246067034",
-  appId: "1:432246067034:web:9cc021d152a94976932d63",
-  measurementId: "G-63JVFC87Q3",
+  apiKey: "AIzaSyDus1I-dkUE4CtOZNlpt8ZKXL5pl1FZ0Mw",
+  authDomain: "saper-ce3aa.firebaseapp.com",
+  databaseURL: "https://saper-ce3aa.firebaseio.com",
+  projectId: "saper-ce3aa",
+  storageBucket: "saper-ce3aa.appspot.com",
+  messagingSenderId: "320043537840",
+  appId: "1:320043537840:web:3d6e8c76ea84c5aa7bb275",
+  measurementId: "G-GZT12414FL",
 };
 
 class Firebase {
